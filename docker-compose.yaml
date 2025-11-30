@@ -46,7 +46,7 @@ services:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
-      - mongo_data:/var/lib/grafana
+      - grafana_data:/var/lib/grafana
     networks:
       - mongo_net
 
@@ -77,3 +77,4 @@ networks:
 
 volumes:
   mongo_data:
+  grafana_data:
