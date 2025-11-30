@@ -16,4 +16,8 @@ kubectl create secret generic db-credentials --from-literal=MONGO_PASSWORD=rootp
 kubectl rollout restart deployments/spring-boot-deployment
 
 ## grafana + kafka cozulecek + argocd
+
+# dashboard id 11378
+# prometheus server url http://prometheus:9090
+
 ## prometheus grafana ok, kafka, argocd, github actions cozulecek
