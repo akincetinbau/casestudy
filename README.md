@@ -16,3 +16,4 @@ kubectl create secret generic db-credentials --from-literal=MONGO_PASSWORD=rootp
 kubectl rollout restart deployments/spring-boot-deployment
 
 ## grafana + kafka cozulecek + argocd
+## prometheus grafana ok, kafka, argocd, github actions cozulecek
