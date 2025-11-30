@@ -23,7 +23,7 @@ public class UserController {
     // CREATE
     @PostMapping
     public User createUser(@RequestBody User user) {
-        //producerService.sendMessage(user.getName() +" " + user.getEmail()+ " successfully created");
+        producerService.sendMessage(user.getName() +" " + user.getEmail()+ " successfully created");
         return service.createUser(user);
     }
 
