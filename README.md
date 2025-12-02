@@ -4,6 +4,11 @@
 # build app
 docker build -t my-spring-app:1.0 .
 
+# pod stop
+kubectl scale deployment grafana --replicas=0
+kubectl scale deployment prometheus --replicas=0
+
+
 # up services with docker-compose.yaml
 docker-compose up -d
 docker-compose down
