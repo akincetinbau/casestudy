@@ -11,6 +11,10 @@ spec:
     metadata:
       labels:
         app: spring-boot-app
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
     spec:
       containers:
         - name: spring-boot-container
@@ -18,6 +22,7 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+              name: http
           env:
             - name: MONGO_HOST
               value: "host.docker.internal"
@@ -34,4 +39,3 @@ spec:
               value: "userdb"
             - name: MONGO_AUTH
               value: "admin"
-
