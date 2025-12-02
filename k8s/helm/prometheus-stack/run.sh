@@ -5,3 +5,5 @@ helm repo update
 kubectl create namespace monitoring
 
 helm upgrade --install monitoring-stack prometheus-community/kube-prometheus-stack -n monitoring -f kube-prometheus-stack-values.yaml
+
+kubectl port-forward svc/monitoring-stack-grafana 3000:80 -n monitoring

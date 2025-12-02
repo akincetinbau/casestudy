@@ -1,6 +1,8 @@
 # casestudy
 # DevOps Engineer Case Study
 
+kubectl get pods -o wide
+
 # build app
 docker build -t my-spring-app:1.0 .
 
@@ -19,6 +21,11 @@ kubectl create secret generic db-credentials --from-literal=MONGO_PASSWORD=rootp
 
 # restart 
 kubectl rollout restart deployments/spring-boot-deployment
+
+# port forward
+Start-Job -ScriptBlock {     kubectl port-forward svc/monitoring-stack-grafana 3000:80 -n monitoring }
+Get-Job
+Stop-Job -Id 1
 
 ## grafana + kafka cozulecek + argocd
 
