@@ -4346,7 +4346,26 @@ prometheus:
     ## The scrape configuration example below will find master nodes, provided they have the name .*mst.*, relabel the
     ## port to 2379 and allow etcd scraping provided it is running on all Kubernetes master nodes
     ##
-    additionalScrapeConfigs: []
+    additionalScrapeConfigs:
+      - job_name: 'spring-boot-app'
+        kubernetes_sd_configs:
+          - namespaces:
+              names:
+                - default
+            role: pod
+        metrics_path: /actuator/prometheus
+        relabel_configs:
+          - action: keep
+            regex: spring
+            source_labels:
+              - __meta_kubernetes_pod_label_app
+          - action: replace
+            replacement: ${1}:8080
+            source_labels:
+              - __meta_kubernetes_pod_ip
+            target_label: __address__
+        scrape_interval: 15s
+      
     # - job_name: kube-etcd
     #   kubernetes_sd_configs:
     #     - role: node
