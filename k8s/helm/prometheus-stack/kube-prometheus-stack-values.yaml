@@ -4356,7 +4356,7 @@ prometheus:
         metrics_path: /actuator/prometheus
         relabel_configs:
           - action: keep
-            regex: spring-boot-app
+            regex: spring-boot-app-spring-boot-app
             source_labels:
               - __meta_kubernetes_pod_label_app
           - action: replace

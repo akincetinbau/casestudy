@@ -24,6 +24,7 @@ kubectl rollout restart deployments/spring-boot-deployment
 
 # port forward
 Start-Job -ScriptBlock {     kubectl port-forward svc/monitoring-stack-grafana 3000:80 -n monitoring }
+Start-Job -ScriptBlock {     kubectl port-forward svc/monitoring-stack-kube-prom-prometheus 9090:443 -n monitoring }
 Get-Job
 Stop-Job -Id 1
 
