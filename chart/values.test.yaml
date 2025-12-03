@@ -15,10 +15,10 @@ deployment:
   name: myapp
   liveness:
     path: /users
-    port: 80
+    port: 8080
   readiness:
     path: /users
-    port: 80
+    port: 8080
   env:
     - name: MONGO_HOST
       value: "host.docker.internal"

@@ -22,7 +22,9 @@ spec:
         - name: {{ .Values.deployment.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-
+          ports:
+            - containerPort: 8080
+              name: http
           env:
             {{- if .Values.deployment.env }}
             {{- range .Values.deployment.env }}
@@ -31,17 +33,17 @@ spec:
             {{- end }}
             {{- end }}
 
-          #livenessProbe:
-          #  httpGet:
-          #    path: {{ .Values.deployment.liveness.path }}
-          #    port: {{ .Values.deployment.liveness.port }}
-          #  initialDelaySeconds: 10
-          #  periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.deployment.liveness.path }}
+              port: {{ .Values.deployment.liveness.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 10
 
-          #readinessProbe:
-          #  httpGet:
-          #    path: {{ .Values.deployment.readiness.path }}
-          #    port: {{ .Values.deployment.readiness.port }}
-          #  initialDelaySeconds: 5
-          #  periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.deployment.readiness.path }}
+              port: {{ .Values.deployment.readiness.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
 {{- end }}
