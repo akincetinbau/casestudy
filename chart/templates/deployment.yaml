@@ -24,12 +24,12 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 
           env:
-          {{- if .Values.envs }}
-          {{- range .Values.envs }}
-          - name: {{ .name }}
-            value: {{ .value }}
-          {{- end }}
-          {{- end }}
+            {{- if .Values.deployment.env }}
+            {{- range .Values.deployment.env }}
+            - name: {{ .name }}
+              value: "{{ .value }}"
+            {{- end }}
+            {{- end }}
 
           livenessProbe:
             httpGet:

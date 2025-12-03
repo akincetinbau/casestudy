@@ -19,6 +19,19 @@ deployment:
   readiness:
     path: /users
     port: 8080
+  env:
+    - name: MONGO_HOST
+      value: "host.docker.internal"
+    - name: MONGO_PORT
+      value: "27017"
+    - name: MONGO_USERNAME
+      value: "root"
+    - name: MONGO_PASSWORD
+      value: "rootpassword"
+    - name: MONGO_DATABASE
+      value: "userdb"
+    - name: MONGO_AUTH
+      value: "admin"
 
 service:
   enabled: true
@@ -48,16 +61,4 @@ role:
 roleBinding:
   enabled: true
 
-env:
-  - name: MONGO_HOST
-    value: "host.docker.internal"
-  - name: MONGO_PORT
-    value: 27017
-  - name: MONGO_USERNAME
-    value: "root"
-  - name: MONGO_PASSWORD
-    value: "rootpassword"
-  - name: MONGO_DATABASE
-    value: "userdb"
-  - name: MONGO_AUTH
-    value: "admin"
+
