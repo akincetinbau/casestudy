@@ -1,0 +1,39 @@
+{{- if .Values.deployment.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mychart.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "mychart.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "mychart.fullname" . }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
+    spec:
+      serviceAccountName: {{ include "mychart.fullname" . }}-sa
+      containers:
+        - name: {{ .Values.deployment.name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.deployment.liveness.path }}
+              port: {{ .Values.deployment.liveness.port }}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.deployment.readiness.path }}
+              port: {{ .Values.deployment.readiness.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+{{- end }}

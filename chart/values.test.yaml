@@ -1,0 +1,49 @@
+replicaCount: 2
+
+image:
+  repository: my-spring-app
+  tag: "1.0"
+  pullPolicy: IfNotPresent
+
+configmap:
+  enabled: true
+  data:
+    myvalue: "test"
+
+deployment:
+  enabled: true
+  name: myapp
+  liveness:
+    path: /users
+    port: 8080
+  readiness:
+    path: /users
+    port: 8080
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+hpa:
+  enabled: false
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+
+ingress:
+  enabled: false
+  className: nginx
+  hosts:
+    - host: test.example.com
+      path: /
+
+serviceAccount:
+  enabled: true
+
+role:
+  enabled: true
+
+roleBinding:
+  enabled: true
