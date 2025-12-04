@@ -37,13 +37,13 @@ spec:
             httpGet:
               path: {{ .Values.deployment.liveness.path }}
               port: {{ .Values.deployment.liveness.port }}
-            initialDelaySeconds: 10
+            initialDelaySeconds: 30
             periodSeconds: 10
 
           readinessProbe:
             httpGet:
               path: {{ .Values.deployment.readiness.path }}
               port: {{ .Values.deployment.readiness.port }}
-            initialDelaySeconds: 5
-            periodSeconds: 5
+            initialDelaySeconds: 30
+            periodSeconds: 10
 {{- end }}
