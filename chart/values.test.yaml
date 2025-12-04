@@ -14,11 +14,11 @@ deployment:
   enabled: true
   name: myapp
   liveness:
-    path: /users
-    port: 8080
+    path: /actuator/health
+    port: 80
   readiness:
-    path: /users
-    port: 8080
+    path: /actuator/health
+    port: 80
   env:
     - name: MONGO_HOST
       value: "host.docker.internal"
